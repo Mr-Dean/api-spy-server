@@ -3,10 +3,10 @@ const cors = require('cors');
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    connectionString: 'postgres://aispy_user:Bso20lLoKQyGBe2TwBE4d3TNOkFPAZTB@dpg-cjckqac5kgrc73cfmh70-a.oregon-postgres.render.com/aispy',
+    connectionString: process.env.DATABASE_URL,
     port : 5432,
-    user : 'aispy_user',
-    password : 'Bso20lLoKQyGBe2TwBE4d3TNOkFPAZTB',
+    user : process.env.DATABASE_USER,
+    password : process.env.DATABASE_PASSWORD,
     database : 'aispy',
     ssl: {
       rejectUnauthorized: false, 
@@ -27,7 +27,7 @@ app.get('/', (req, res) => getCount(req, res, knex));
 
 app.post('/imageUrl', (req, res) => detectImage(req, res));
 
-app.put('/api/updateCount', (req, res) => updateCount(req, res, knex));
+app.put('/updateCount', (req, res) => updateCount(req, res, knex));
 
 
 
