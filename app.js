@@ -4,7 +4,6 @@ const knex = require('knex')({
   client: 'pg',
   connection: {
     connectionString: 'postgres://aispy_user:Bso20lLoKQyGBe2TwBE4d3TNOkFPAZTB@dpg-cjckqac5kgrc73cfmh70-a/aispy',
-    host : 'dpg-cjckqac5kgrc73cfmh70-a',
     port : 5432,
     user : 'aispy_user',
     password : 'Bso20lLoKQyGBe2TwBE4d3TNOkFPAZTB',
