@@ -10,46 +10,31 @@ const knex = require('knex')({
     database : 'ai-spy'
   }
 });
-
-
+const { getCount, updateCount } = require('./controllers/count');
+const { clarifaiAPI } = require('./controllers/clarifaiApi');
 
 
 const app = express();
 
-
 app.use(cors());
 app.use(express.json())
 
-app.get('/', async (req, res) => {
-  try {
-    const result = await knex('total_count').select('count');
-    console.log('Query result:', result); // Log the result
-    res.json(result);
-  } catch (error) {
-    console.error('Error fetching total count:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
+app.get('/', (req, res) => getCount(req, res, knex));
+
+app.post('/imageUrl', async (req, res) => {
+
+const { input } = req.body;
+//will need to use axios in clarifai api to get data to send back as response.
+console.log(input);
+
+const data = await clarifaiAPI(input);
+console.log(data);
+
+})
+
+app.put('/api/updateCount', (req, res) => updateCount(req, res, knex));
 
 
-app.put('/api/updateCount', async (req, res) => {
-  const { count } = req.body;
-
-  if (typeof count === 'number') {
-    try {
-      await knex('total_count').update({ count });
-
-      res.status(200).json({ message: 'Count updated successfully' });
-      console.log(`Count updated by: ${count}`);
-
-    } catch (error) {
-      console.error('Error updating count value:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  } else {
-    res.status(400).json({ error: 'Invalid count value' });
-  }
-});
 
 app.listen(3000, () => {
     console.log("Listening on port 3000")
