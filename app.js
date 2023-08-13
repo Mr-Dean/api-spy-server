@@ -3,11 +3,13 @@ const cors = require('cors');
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
+    connectionString: 'postgres://aispy_user:Bso20lLoKQyGBe2TwBE4d3TNOkFPAZTB@dpg-cjckqac5kgrc73cfmh70-a/aispy',
+    host : 'dpg-cjckqac5kgrc73cfmh70-a',
     port : 5432,
-    user : 'deanarnold',
-    password : '',
-    database : 'ai-spy'
+    user : 'aispy_user',
+    password : 'Bso20lLoKQyGBe2TwBE4d3TNOkFPAZTB',
+    database : 'aispy',
+    ssl: {rejectUnauthorized: false}
   }
 });
 const { getCount, updateCount } = require('./controllers/count');
