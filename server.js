@@ -11,7 +11,7 @@ const knex = require('knex')({
   }
 });
 const { getCount, updateCount } = require('./controllers/count');
-const { clarifaiAPI } = require('./controllers/clarifaiApi');
+const { detectImage } = require('./controllers/clarifaiApi');
 
 
 const app = express();
@@ -21,16 +21,7 @@ app.use(express.json())
 
 app.get('/', (req, res) => getCount(req, res, knex));
 
-app.post('/imageUrl', async (req, res) => {
-
-const { input } = req.body;
-//will need to use axios in clarifai api to get data to send back as response.
-console.log(input);
-
-const data = await clarifaiAPI(input);
-console.log(data);
-
-})
+app.post('/imageUrl', (req, res) => detectImage(req, res));
 
 app.put('/api/updateCount', (req, res) => updateCount(req, res, knex));
 
