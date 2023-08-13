@@ -8,7 +8,10 @@ const knex = require('knex')({
     user : 'aispy_user',
     password : 'Bso20lLoKQyGBe2TwBE4d3TNOkFPAZTB',
     database : 'aispy',
-    ssl: true
+    ssl: {
+      rejectUnauthorized: false, 
+    }
+    
   }
 });
 const { getCount, updateCount } = require('./controllers/count');
