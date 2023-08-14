@@ -34,7 +34,7 @@ function clarifaiAPI(url) {
         data: raw,
     };
 
-    axios(requestOptions)
+    return axios(requestOptions)
         .then((response) => {
             const results = response.data;
             return results.outputs[0].data.regions;
@@ -46,10 +46,14 @@ function clarifaiAPI(url) {
 }
 
 async function detectImage(req, res) {
-    const { input } = req.body;
+    try {
+        const { input } = req.body;
     
-    const data = await clarifaiAPI(input);
-    res.status(200).json(data);
+        const data = await clarifaiAPI(input);
+        res.status(200).json(data);
+    } catch(error) {
+        res.status(500).json(error)
+    }
 }
 
 module.exports = {
