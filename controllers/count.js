@@ -2,7 +2,7 @@ async function getCount(req, res, knex) {
     try {
         const result = await knex('total_count').select('count');
         console.log('Query result:', result); // Log the result
-        res.json(0);
+        res.json(result);
       } catch (error) {
         console.error('Error fetching total count:', error);
         res.status(500).json({ error: 'Internal server error' });
