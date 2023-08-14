@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 function clarifaiAPI(url) {
-    const PAT = 'f8e10948cbf9420f85a5fcf3d7d7290a';
+    const PAT = process.env.CLARIFAI_PAT;
     const USER_ID = 'clarifai';
     const APP_ID = 'main';
     const MODEL_ID = 'general-image-detection';
@@ -51,7 +51,8 @@ async function detectImage(req, res) {
     
         const data = await clarifaiAPI(input);
         res.status(200).json(data);
-    } catch(error) {
+    } 
+    catch(error) {
         res.status(500).json(error)
     }
 }
