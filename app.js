@@ -18,8 +18,8 @@ const knex = require('knex')({
 const { getCount, updateCount } = require('./controllers/count');
 const { detectImage } = require('./controllers/clarifaiApi');
 
-
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json())
@@ -32,6 +32,6 @@ app.put('/updateCount', (req, res) => updateCount(req, res, knex));
 
 
 
-app.listen(3000, () => {
-    console.log("Listening on port 3000")
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`)
 })
