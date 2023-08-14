@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 function clarifaiAPI(url) {
-    const PAT = process.env.CLARIFAI_PAT;
+    const PAT = 'f8e10948cbf9420f85a5fcf3d7d7290a';
     const USER_ID = 'clarifai';
     const APP_ID = 'main';
     const MODEL_ID = 'general-image-detection';
@@ -34,7 +34,7 @@ function clarifaiAPI(url) {
         data: raw,
     };
 
-    return axios(requestOptions)
+    axios(requestOptions)
         .then((response) => {
             const results = response.data;
             return results.outputs[0].data.regions;
@@ -49,7 +49,7 @@ async function detectImage(req, res) {
     const { input } = req.body;
     
     const data = await clarifaiAPI(input);
-    res.status(200).json(input);
+    res.status(200).json(data);
 }
 
 module.exports = {
