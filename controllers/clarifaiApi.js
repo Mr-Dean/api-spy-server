@@ -47,6 +47,7 @@ function clarifaiAPI(url) {
 
 async function detectImage(req, res) {
     const { input } = req.body;
+    
     const data = await clarifaiAPI(input);
     res.status(200).json(data);
 }
